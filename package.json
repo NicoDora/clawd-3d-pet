@@ -1,0 +1,17 @@
+{
+  "name": "clawd-3d-pet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Clawd 3D — a 3D-remodelled custom theme for Clawd on Desk, rendered from a three.js rig.",
+  "type": "module",
+  "scripts": {
+    "render": "node render.mjs --out out",
+    "build": "node build-theme.mjs out theme/clawd-3d",
+    "install-theme": "node scripts/install-theme.mjs",
+    "preview": "python3 -m http.server 8080"
+  },
+  "dependencies": {
+    "puppeteer-core": "^23.11.1",
+    "three": "^0.170.0"
+  }
+}

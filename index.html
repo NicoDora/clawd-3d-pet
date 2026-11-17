@@ -1,0 +1,63 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Clawd 3D studio</title>
+<style>
+  body { margin: 0; background: #dfe6ee; font: 13px system-ui; }
+  canvas { width: 480px; height: 480px; display: block; background: transparent; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "/node_modules/three/build/three.module.js",
+  "three/addons/": "/node_modules/three/examples/jsm/"
+} }
+</script>
+<canvas id="c"></canvas>
+<script type="module">
+  import { createStudio } from "/src/rig.js";
+  import { ANIMS } from "/src/anims.js";
+  const px = Number(new URLSearchParams(location.search).get("px") || 960);
+  const studio = await createStudio(document.getElementById("c"), px, "/node_modules/three/examples/fonts/helvetiker_bold.typeface.json");
+  window.ANIM_INFO = Object.fromEntries(Object.entries(ANIMS).map(([k, a]) => [k, { dur: a.dur, fps: a.fps || 20, loop: a.loop !== false, layer: a.layers || null, qa: !!a.qa }]));
+  window.renderFrame = (name, t, layer = "all") => {
+    const a = ANIMS[name];
+    studio.R.reset();
+    a.fn(t, studio.R, studio);
+    studio.setLayer(layer);
+    studio.render();
+    return document.getElementById("c").toDataURL("image/png");
+  };
+  // Flat-shaded vector stand-in for the layered idle (shown wherever the SVG is
+  // drawn through <img>, which cannot load the raster layers). Each box is inset
+  // so the rasters fully cover it when they do load.
+  window.exportVector = (name) => {
+    const { R, camera, THREE } = studio;
+    R.reset(); ANIMS[name].fn(0, R, studio); R.root.updateMatrixWorld(true); camera.updateMatrixWorld(true);
+    const INSET = 0.66, out = [];
+    const shade = { top: "#F2A68F", front: "#E58D73", side: "#CB7A60", back: "#B96B52", bottom: "#B96B52" };
+    const part = (mesh, group, clipTop = null, fills = shade) => {
+      mesh.geometry.computeBoundingBox();
+      const b = mesh.geometry.boundingBox.clone();
+      if (clipTop != null) b.max.y = clipTop;
+      const inset = Math.min(INSET, (b.max.x - b.min.x) / 2 - 0.05, (b.max.y - b.min.y) / 2 - 0.05);
+      b.min.addScalar(inset); b.max.subScalar(inset);
+      const c = (x, y, z) => new THREE.Vector3(x ? b.max.x : b.min.x, y ? b.max.y : b.min.y, z ? b.max.z : b.min.z).applyMatrix4(mesh.matrixWorld);
+      const faces = [["front", [c(0,0,1), c(1,0,1), c(1,1,1), c(0,1,1)]], ["back", [c(1,0,0), c(0,0,0), c(0,1,0), c(1,1,0)]],
+        ["top", [c(0,1,1), c(1,1,1), c(1,1,0), c(0,1,0)]], ["bottom", [c(0,0,0), c(1,0,0), c(1,0,1), c(0,0,1)]],
+        ["side", [c(1,0,1), c(1,0,0), c(1,1,0), c(1,1,1)]], ["side", [c(0,0,0), c(0,0,1), c(0,1,1), c(0,1,0)]]];
+      const centre = new THREE.Vector3(); b.getCenter(centre).applyMatrix4(mesh.matrixWorld);
+      for (const [kind, pts] of faces) {
+        const n = new THREE.Vector3().subVectors(pts[1], pts[0]).cross(new THREE.Vector3().subVectors(pts[2], pts[0]));
+        const mid = pts.reduce((a, p) => a.add(p), new THREE.Vector3()).multiplyScalar(0.25);
+        if (n.dot(new THREE.Vector3().subVectors(camera.position, mid)) <= 0) continue;
+        const svg = pts.map((p) => { const q = p.clone().project(camera); return [(-15 + (q.x + 1) * 22.5).toFixed(2), (-25 + (1 - q.y) * 22.5).toFixed(2)].join(","); }).join(" ");
+        out.push({ group, fill: fills[kind], pts: svg, depth: centre.distanceTo(camera.position) });
+      }
+    };
+    R.legs.forEach((l) => part(l.userData.mesh, "body", 0.3));
+    part(R.torso, "body"); part(R.armL.userData.mesh, "body"); part(R.armR.userData.mesh, "body");
+    const black = { top: "#17110f", front: "#17110f", side: "#17110f", back: "#17110f", bottom: "#17110f" };
+    [R.eyeL, R.eyeR].forEach((e) => part(e.userData.v.rect.children[0], "eyes", null, black));
+    return out.sort((a, b) => b.depth - a.depth).map(({ depth, ...o }) => o);
+  };
+  window.studioReady = true;
+</script>

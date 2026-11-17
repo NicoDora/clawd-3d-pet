@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500">
+  <defs>
+    <style>
+      .breathe-anim {
+        transform-origin: 7.5px 15.4px;
+        animation: breathe 3.2s infinite ease-in-out;
+      }
+      .eyes-blink {
+        transform-origin: 6.85px 9.65px;
+        animation: eye-blink 4s infinite ease-in-out;
+      }
+      #eyes-js, #body-js, #shadow-js {
+        transition: transform 0.2s ease-out;
+      }
+      #shadow-js {
+        transform-origin: 7.5px 15px;
+      }
+      @keyframes breathe {
+        0%, 100% { transform: scale(1, 1); }
+        50% { transform: scale(1.018, 0.972); }
+      }
+      @keyframes eye-blink {
+        0%, 10%, 100% { transform: scaleY(1); }
+        5% { transform: scaleY(0.1); }
+      }
+    </style>
+  </defs>
+
+  <!-- Ground shadow (the app shifts and stretches it toward the pointer) -->
+  <g id="shadow-js">
+    <image href="clawd3d-idle-shadow.png" x="-15" y="-25" width="45" height="45"/>
+  </g>
+
+  <!-- 3D body (the app leans it toward the pointer) + CSS breathing -->
+  <g id="body-js">
+    <g id="torso" class="breathe-anim">
+      <!-- Flat vector stand-in, covered by the raster below wherever rasters can load -->
+      <polygon points="5.81,13.58 5.90,13.58 5.90,12.67 5.81,12.66" fill="#E58D73" stroke="#E58D73" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="5.81,12.66 5.90,12.67 5.97,12.57 5.87,12.57" fill="#F2A68F" stroke="#F2A68F" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="5.90,13.58 5.97,13.49 5.97,12.57 5.90,12.67" fill="#CB7A60" stroke="#CB7A60" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="9.59,13.86 9.69,13.87 9.69,12.95 9.60,12.94" fill="#E58D73" stroke="#E58D73" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="9.60,12.94 9.69,12.95 9.75,12.85 9.66,12.85" fill="#F2A68F" stroke="#F2A68F" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="9.69,13.87 9.75,13.77 9.75,12.85 9.69,12.95" fill="#CB7A60" stroke="#CB7A60" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="0.90,9.91 1.73,9.97 1.72,9.33 0.89,9.28" fill="#E58D73" stroke="#E58D73" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="0.89,9.28 1.72,9.33 1.94,9.07 1.11,9.01" fill="#F2A68F" stroke="#F2A68F" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="1.73,9.97 1.94,9.70 1.94,9.07 1.72,9.33" fill="#CB7A60" stroke="#CB7A60" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="3.28,14.34 3.37,14.34 3.37,13.42 3.27,13.41" fill="#E58D73" stroke="#E58D73" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="3.27,13.41 3.37,13.42 3.44,13.32 3.34,13.31" fill="#F2A68F" stroke="#F2A68F" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="3.37,14.34 3.44,14.25 3.44,13.32 3.37,13.42" fill="#CB7A60" stroke="#CB7A60" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="2.27,12.59 11.64,13.29 11.67,7.89 2.23,7.24" fill="#E58D73" stroke="#E58D73" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="2.23,7.24 11.67,7.89 12.68,6.34 3.49,5.74" fill="#F2A68F" stroke="#F2A68F" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="11.64,13.29 12.64,11.61 12.68,6.34 11.67,7.89" fill="#CB7A60" stroke="#CB7A60" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="10.96,14.93 11.05,14.94 11.06,14.00 10.96,13.99" fill="#E58D73" stroke="#E58D73" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="10.96,13.99 11.06,14.00 11.12,13.90 11.02,13.90" fill="#F2A68F" stroke="#F2A68F" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="11.05,14.94 11.11,14.84 11.12,13.90 11.06,14.00" fill="#CB7A60" stroke="#CB7A60" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="13.17,10.79 14.02,10.85 14.03,10.21 13.17,10.15" fill="#E58D73" stroke="#E58D73" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="13.17,10.15 14.03,10.21 14.19,9.94 13.33,9.87" fill="#F2A68F" stroke="#F2A68F" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="14.02,10.85 14.18,10.57 14.19,9.94 14.03,10.21" fill="#CB7A60" stroke="#CB7A60" stroke-width="0.5" stroke-linejoin="round"/>
+      <image href="clawd3d-idle-body.png" x="-15" y="-25" width="45" height="45"/>
+      <!-- Eyes: pointer-tracking wrapper + CSS blink -->
+      <g id="eyes-js">
+        <g class="eyes-blink">
+          <polygon points="3.85,9.98 3.94,9.99 3.94,8.94 3.84,8.94" fill="#17110f" stroke="#17110f" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="3.76,10.09 3.86,10.10 3.94,9.99 3.85,9.98" fill="#17110f" stroke="#17110f" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="3.76,10.09 3.85,9.98 3.84,8.94 3.76,9.04" fill="#17110f" stroke="#17110f" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="9.69,10.40 9.79,10.41 9.80,9.35 9.70,9.35" fill="#17110f" stroke="#17110f" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="9.62,10.51 9.72,10.52 9.79,10.41 9.69,10.40" fill="#17110f" stroke="#17110f" stroke-width="0.5" stroke-linejoin="round"/>
+      <polygon points="9.62,10.51 9.69,10.40 9.70,9.35 9.62,9.46" fill="#17110f" stroke="#17110f" stroke-width="0.5" stroke-linejoin="round"/>
+          <image href="clawd3d-idle-eyes.png" x="-15" y="-25" width="45" height="45"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

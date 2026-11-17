@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 1,
+  "name": "Clawd 3D",
+  "author": "Custom theme (built with Claude Code)",
+  "version": "1.0.0",
+  "description": "Clawd, remodelled in 3D — every state, reaction and mini-mode animation re-rendered from a 3D rig.",
+  "preview": "clawd3d-idle-preview.png",
+  "rendering": {
+    "objectChannelFiles": [
+      "clawd3d-idle-follow.svg"
+    ],
+    "discreteSampling": {
+      "clawd3d-idle-follow.svg": 24
+    }
+  },
+  "customization": {
+    "petTint": false
+  },
+  "viewBox": {
+    "x": -15,
+    "y": -25,
+    "width": 45,
+    "height": 45
+  },
+  "layout": {
+    "contentBox": {
+      "x": -4,
+      "y": -3,
+      "width": 23,
+      "height": 20
+    },
+    "marginBox": {
+      "x": -8,
+      "y": -7,
+      "width": 30,
+      "height": 24
+    },
+    "centerX": 7.5,
+    "baselineY": 17,
+    "visibleHeightRatio": 0.58,
+    "baselineBottomRatio": 0.05
+  },
+  "eyeTracking": {
+    "enabled": true,
+    "states": [
+      "idle"
+    ],
+    "eyeRatioX": 0.485,
+    "eyeRatioY": 0.77,
+    "maxOffset": 1.6,
+    "bodyScale": 0.33,
+    "shadowStretch": 0.1,
+    "shadowShift": 0.3,
+    "ids": {
+      "eyes": "eyes-js",
+      "body": "body-js",
+      "shadow": "shadow-js"
+    },
+    "shadowOrigin": "7.5px 15px"
+  },
+  "states": {
+    "idle": [
+      "clawd3d-idle-follow.svg"
+    ],
+    "roam": [
+      "clawd3d-crabwalk.apng"
+    ],
+    "yawning": [
+      "clawd3d-idle-yawn.apng"
+    ],
+    "dozing": [
+      "clawd3d-idle-doze.apng"
+    ],
+    "collapsing": [
+      "clawd3d-collapse-sleep.apng"
+    ],
+    "thinking": [
+      "clawd3d-working-thinking.apng"
+    ],
+    "working": [
+      "clawd3d-working-typing.apng"
+    ],
+    "juggling": [
+      "clawd3d-headphones-groove.apng"
+    ],
+    "sweeping": [
+      "clawd3d-working-sweeping.apng"
+    ],
+    "error": [
+      "clawd3d-error.apng"
+    ],
+    "attention": [
+      "clawd3d-happy.apng"
+    ],
+    "notification": [
+      "clawd3d-notification.apng"
+    ],
+    "carrying": [
+      "clawd3d-working-carrying.apng"
+    ],
+    "sleeping": [
+      "clawd3d-sleeping.apng"
+    ],
+    "waking": [
+      "clawd3d-wake.apng"
+    ],
+    "dizzy": [
+      "clawd3d-dizzy.apng"
+    ]
+  },
+  "workingTiers": [
+    {
+      "minSessions": 3,
+      "file": "clawd3d-working-building.apng"
+    },
+    {
+      "minSessions": 2,
+      "file": "clawd3d-headphones-groove.apng"
+    },
+    {
+      "minSessions": 1,
+      "file": "clawd3d-working-typing.apng"
+    }
+  ],
+  "jugglingTiers": [
+    {
+      "minSessions": 2,
+      "file": "clawd3d-working-juggling.apng"
+    },
+    {
+      "minSessions": 1,
+      "file": "clawd3d-headphones-groove.apng"
+    }
+  ],
+  "idleAnimations": [
+    {
+      "file": "clawd3d-idle-look.apng",
+      "duration": 6000
+    },
+    {
+      "file": "clawd3d-idle-bubble.apng",
+      "duration": 13500,
+      "mirrorOnRightSide": true
+    },
+    {
+      "file": "clawd3d-idle-reading.apng",
+      "duration": 16000
+    }
+  ],
+  "displayHintMap": {
+    "claude-design": "clawd3d-designing.apng",
+    "clawd-working-building.svg": "clawd3d-working-building.apng",
+    "clawd-working-typing.svg": "clawd3d-working-typing.apng",
+    "clawd-headphones-groove.svg": "clawd3d-headphones-groove.apng",
+    "clawd-working-juggling.svg": "clawd3d-working-juggling.apng",
+    "clawd-working-conducting.svg": "clawd3d-working-juggling.apng",
+    "clawd-idle-reading.svg": "clawd3d-idle-reading.apng",
+    "clawd-idle-bubble.svg": "clawd3d-idle-bubble.apng",
+    "clawd-working-debugger.svg": "clawd3d-working-debugger.apng",
+    "clawd-working-thinking.svg": "clawd3d-working-thinking.apng"
+  },
+  "completionVisualMap": {
+    "claude-design": "clawd3d-heart-eyes.apng"
+  },
+  "updateVisuals": {
+    "checking": "clawd3d-working-debugger.apng"
+  },
+  "timings": {
+    "minDisplay": {
+      "attention": 4000,
+      "error": 5000,
+      "sweeping": 5500,
+      "notification": 5000,
+      "carrying": 3000,
+      "working": 1000,
+      "thinking": 1000
+    },
+    "autoReturn": {
+      "attention": 4000,
+      "error": 5000,
+      "sweeping": 300000,
+      "notification": 5000,
+      "carrying": 3000,
+      "dizzy": 6000
+    },
+    "yawnDuration": 3600,
+    "collapseDuration": 1400,
+    "wakeDuration": 1600,
+    "deepSleepTimeout": 600000,
+    "mouseIdleTimeout": 20000,
+    "mouseSleepTimeout": 60000
+  },
+  "hitBoxes": {
+    "default": {
+      "x": -1,
+      "y": 5,
+      "w": 17,
+      "h": 12
+    },
+    "sleeping": {
+      "x": -2,
+      "y": 9,
+      "w": 19,
+      "h": 7
+    },
+    "wide": {
+      "x": -3,
+      "y": 3,
+      "w": 21,
+      "h": 14
+    }
+  },
+  "fileHitBoxes": {
+    "clawd3d-working-typing.apng": {
+      "x": -2,
+      "y": -7,
+      "w": 20,
+      "h": 25
+    },
+    "clawd3d-working-building.apng": {
+      "x": -1,
+      "y": 0,
+      "w": 24,
+      "h": 17
+    },
+    "clawd3d-working-carrying.apng": {
+      "x": -1,
+      "y": 0,
+      "w": 17,
+      "h": 17
+    }
+  },
+  "wideHitboxFiles": [
+    "clawd3d-error.apng",
+    "clawd3d-notification.apng"
+  ],
+  "sleepingHitboxFiles": [
+    "clawd3d-sleeping.apng",
+    "clawd3d-collapse-sleep.apng"
+  ],
+  "reactions": {
+    "drag": {
+      "file": "clawd3d-react-drag.apng"
+    },
+    "clickLeft": {
+      "file": "clawd3d-react-left.apng",
+      "duration": 2500
+    },
+    "clickRight": {
+      "file": "clawd3d-react-right.apng",
+      "duration": 2500
+    },
+    "annoyed": {
+      "file": "clawd3d-react-annoyed.apng",
+      "duration": 3500
+    },
+    "double": {
+      "files": [
+        "clawd3d-react-double.apng",
+        "clawd3d-react-double-jump.apng"
+      ],
+      "duration": 3500
+    }
+  },
+  "miniMode": {
+    "supported": true,
+    "offsetRatio": 0.486,
+    "states": {
+      "mini-idle": [
+        "clawd3d-mini-idle.apng"
+      ],
+      "mini-alert": [
+        "clawd3d-mini-alert.apng"
+      ],
+      "mini-happy": [
+        "clawd3d-mini-happy.apng"
+      ],
+      "mini-enter": [
+        "clawd3d-mini-enter.apng"
+      ],
+      "mini-peek": [
+        "clawd3d-mini-peek.apng"
+      ],
+      "mini-working": [
+        "clawd3d-mini-typing.apng"
+      ],
+      "mini-crabwalk": [
+        "clawd3d-crabwalk.apng"
+      ],
+      "mini-enter-sleep": [
+        "clawd3d-mini-enter-sleep.apng"
+      ],
+      "mini-sleep": [
+        "clawd3d-mini-sleep.apng"
+      ]
+    },
+    "timings": {
+      "minDisplay": {
+        "mini-alert": 4000,
+        "mini-happy": 4000
+      },
+      "autoReturn": {
+        "mini-alert": 4000,
+        "mini-happy": 4000
+      }
+    }
+  },
+  "mirroredFiles": {
+    "clawd3d-mini-sleep.apng": "clawd3d-mini-sleep-left.apng"
+  },
+  "objectScale": {
+    "widthRatio": 1.9,
+    "heightRatio": 1.3,
+    "offsetX": -0.45,
+    "offsetY": -0.25
+  }
+}
